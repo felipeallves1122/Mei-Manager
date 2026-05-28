@@ -1,0 +1,41 @@
+<div class="glass-panel list-container animate-fade-in" style="animation-delay: 0.5s">
+  <h3>Histórico de Movimentações</h3>
+  
+  <div class="table-responsive">
+    <table class="transaction-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Descrição</th>
+          <th>Tipo</th>
+          <th class="text-right">Valor</th>
+          <th class="text-center">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of financeService.transactions()">
+          <td>{{ t.date | date:'dd/MM/yyyy' }}</td>
+          <td>{{ t.description }}</td>
+          <td>
+            <span class="badge" [class.badge-income]="isIncome(t.type)" [class.badge-expense]="!isIncome(t.type)">
+              {{ getIcon(t.type) }} {{ getLabel(t.type) }}
+            </span>
+          </td>
+          <td class="text-right" [class.text-income]="isIncome(t.type)" [class.text-expense]="!isIncome(t.type)">
+            {{ isIncome(t.type) ? '+' : '-' }} {{ t.amount | currency:'BRL':'symbol':'1.2-2' }}
+          </td>
+          <td class="text-center">
+            <button class="btn btn-icon" (click)="onDelete(t.id)" title="Excluir">
+              🗑️
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="financeService.transactions().length === 0">
+          <td colspan="5" class="text-center empty-state">
+            Nenhuma movimentação registrada ainda.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

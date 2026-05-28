@@ -1,0 +1,146 @@
+.home-layout {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* Sidebar Styling */
+.summary-sidebar {
+  width: 70px;
+  overflow: hidden;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+  padding: 1.5rem 0;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.summary-sidebar:hover {
+  width: 260px;
+  box-shadow: var(--shadow-md);
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  gap: 1rem;
+  cursor: default;
+}
+
+.sidebar-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.sidebar-details {
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+}
+
+.summary-sidebar:hover .sidebar-details {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.card-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.2rem;
+}
+
+.amount {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.amount.negative, .danger {
+  color: var(--danger);
+}
+
+.success {
+  color: var(--success);
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 0.5rem 1rem;
+  opacity: 0.5;
+}
+
+.mini-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-top: 0.2rem;
+}
+
+.mini-stat {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.85rem;
+}
+
+.mini-label {
+  color: var(--text-muted);
+}
+
+/* Main Content Styling */
+.main-content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .home-layout {
+    flex-direction: column;
+  }
+  .summary-sidebar {
+    width: 100%;
+    height: auto;
+    padding: 1rem;
+  }
+  .sidebar-title, .sidebar-content {
+    opacity: 1;
+  }
+  .preview-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .card {
+    flex: 1;
+    min-width: 120px;
+  }
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

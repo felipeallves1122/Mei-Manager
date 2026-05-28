@@ -1,0 +1,33 @@
+<div class="reports-container">
+  <h2>Relatórios Mensais</h2>
+
+  <div class="chart-container">
+    <canvas #chartCanvas></canvas>
+  </div>
+
+  <div class="table-container">
+    <table class="reports-table">
+      <thead>
+        <tr>
+          <th>Mês</th>
+          <th>Entradas</th>
+          <th>Saídas</th>
+          <th>Lucro / Dívida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let report of financeService.monthlyReports()">
+          <td>{{ report.month }}</td>
+          <td class="entrada">{{ report.entradas | currency:'BRL' }}</td>
+          <td class="saida">{{ report.saidas | currency:'BRL' }}</td>
+          <td [ngClass]="{'lucro': report.lucro > 0, 'prejuizo': report.lucro < 0, 'neutro': report.lucro === 0}">
+            {{ report.lucro | currency:'BRL' }}
+          </td>
+        </tr>
+        <tr *ngIf="financeService.monthlyReports().length === 0">
+          <td colspan="4" class="empty-state">Nenhum dado financeiro registrado ainda.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

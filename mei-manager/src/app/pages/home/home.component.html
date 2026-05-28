@@ -1,0 +1,64 @@
+<div class="home-layout">
+  <!-- Sidebar Expansível com as Métricas -->
+  <aside class="summary-sidebar glass-panel">
+    
+    <div class="sidebar-item">
+      <div class="sidebar-icon revenue-icon">💰</div>
+      <div class="sidebar-details">
+        <span class="card-label">Apurado</span>
+        <strong class="amount">{{ financeService.apurado() | currency:'BRL':'symbol':'1.2-2' }}</strong>
+      </div>
+    </div>
+
+    <div class="sidebar-item">
+      <div class="sidebar-icon profit-icon">📈</div>
+      <div class="sidebar-details">
+        <span class="card-label">Lucro</span>
+        <strong class="amount" [class.negative]="financeService.lucro() < 0">
+          {{ financeService.lucro() | currency:'BRL':'symbol':'1.2-2' }}
+        </strong>
+      </div>
+    </div>
+
+    <div class="sidebar-item">
+      <div class="sidebar-icon debt-icon">💸</div>
+      <div class="sidebar-details">
+        <span class="card-label">Dívidas</span>
+        <strong class="amount negative">{{ financeService.dividas() | currency:'BRL':'symbol':'1.2-2' }}</strong>
+      </div>
+    </div>
+
+    <!-- Divisória opcional para o relatório mensal -->
+    <div class="sidebar-divider" *ngIf="latestReport"></div>
+
+    <div class="sidebar-item" *ngIf="latestReport">
+      <div class="sidebar-icon">📅</div>
+      <div class="sidebar-details">
+        <span class="card-label">Mês atual ({{ latestReport.month }})</span>
+        <div class="mini-stats">
+          <div class="mini-stat">
+            <span class="mini-label">Entrou:</span>
+            <span class="mini-val success">{{ latestReport.entradas | currency:'BRL' }}</span>
+          </div>
+          <div class="mini-stat">
+            <span class="mini-label">Saiu:</span>
+            <span class="mini-val danger">{{ latestReport.saidas | currency:'BRL' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <div class="content-grid">
+      <section>
+        <app-transaction-form></app-transaction-form>
+      </section>
+      <section>
+        <app-transaction-list></app-transaction-list>
+      </section>
+    </div>
+  </main>
+</div>

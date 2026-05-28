@@ -1,0 +1,53 @@
+<div class="glass-panel form-container animate-fade-in" style="animation-delay: 0.4s">
+  <h3>Nova Movimentação</h3>
+  <form [formGroup]="transactionForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group mb-3">
+      <label class="form-label">Tipo de Movimentação</label>
+      <div class="type-chips">
+        <label class="chip" [class.active]="transactionForm.get('type')?.value === 'venda_vista'">
+          <input type="radio" formControlName="type" value="venda_vista"> Venda à Vista (+)
+        </label>
+        <label class="chip" [class.active]="transactionForm.get('type')?.value === 'venda_prazo'">
+          <input type="radio" formControlName="type" value="venda_prazo"> Venda a Prazo (+)
+        </label>
+        <label class="chip" [class.active]="transactionForm.get('type')?.value === 'compra_vista'">
+          <input type="radio" formControlName="type" value="compra_vista"> Compra à Vista (-)
+        </label>
+        <label class="chip" [class.active]="transactionForm.get('type')?.value === 'compra_prazo'">
+          <input type="radio" formControlName="type" value="compra_prazo"> Compra a Prazo (-)
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group mb-3 is-fixed-checkbox">
+      <label class="checkbox-label">
+        <input type="checkbox" formControlName="isFixed"> É um gasto fixo mensal
+      </label>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group" *ngIf="!transactionForm.get('isFixed')?.value">
+        <label class="form-label">Data</label>
+        <input type="date" class="form-control" formControlName="date">
+      </div>
+      <div class="form-group" *ngIf="transactionForm.get('isFixed')?.value">
+        <label class="form-label">Dia de Vencimento</label>
+        <input type="number" class="form-control" formControlName="dayOfMonth" min="1" max="31" placeholder="Ex: 5">
+      </div>
+      
+      <div class="form-group">
+        <label class="form-label">Descrição</label>
+        <input type="text" class="form-control" formControlName="description" placeholder="Ex: Venda de produto X">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Valor (R$)</label>
+        <input type="number" step="0.01" class="form-control" formControlName="amount" placeholder="0.00">
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary submit-btn" [disabled]="!transactionForm.valid">
+      Adicionar Movimentação
+    </button>
+  </form>
+</div>

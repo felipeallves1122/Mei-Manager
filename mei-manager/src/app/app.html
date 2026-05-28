@@ -1,0 +1,20 @@
+<header class="app-header" *ngIf="authService.isAuthenticated()">
+  <div class="container header-content">
+    <div class="logo">
+      <span class="logo-icon">📊</span>
+      <h1>MeiManager</h1>
+    </div>
+    <nav class="header-nav">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Início</a>
+      <a routerLink="/relatorios" routerLinkActive="active">Relatórios</a>
+    </nav>
+    <div class="header-actions">
+      <span class="user-badge">MEI</span>
+      <button class="btn-logout" (click)="logout()">Sair</button>
+    </div>
+  </div>
+</header>
+
+<main class="container app-content">
+  <router-outlet></router-outlet>
+</main>

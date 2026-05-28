@@ -1,0 +1,39 @@
+<div class="dashboard-grid">
+  <!-- Apurado Card -->
+  <div class="card glass-panel animate-fade-in" style="animation-delay: 0.1s">
+    <div class="card-header">
+      <h3>Apurado</h3>
+      <span class="icon revenue-icon">💰</span>
+    </div>
+    <div class="card-body">
+      <h2 class="amount">{{ financeService.apurado() | currency:'BRL':'symbol':'1.2-2' }}</h2>
+      <p class="subtitle">Vendas à vista e a prazo</p>
+    </div>
+  </div>
+
+  <!-- Lucro Card -->
+  <div class="card glass-panel animate-fade-in" style="animation-delay: 0.2s">
+    <div class="card-header">
+      <h3>Lucro</h3>
+      <span class="icon profit-icon">📈</span>
+    </div>
+    <div class="card-body">
+      <h2 class="amount" [class.negative]="financeService.lucro() < 0">
+        {{ financeService.lucro() | currency:'BRL':'symbol':'1.2-2' }}
+      </h2>
+      <p class="subtitle">Receitas - Despesas</p>
+    </div>
+  </div>
+
+  <!-- Dívidas Card -->
+  <div class="card glass-panel animate-fade-in" style="animation-delay: 0.3s">
+    <div class="card-header">
+      <h3>Dívidas</h3>
+      <span class="icon debt-icon">💸</span>
+    </div>
+    <div class="card-body">
+      <h2 class="amount negative">{{ financeService.dividas() | currency:'BRL':'symbol':'1.2-2' }}</h2>
+      <p class="subtitle">Compras a prazo (Pendentes)</p>
+    </div>
+  </div>
+</div>
